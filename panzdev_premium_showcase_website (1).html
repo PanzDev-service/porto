@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PanzDev Company Profile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#f5f7fb;
+      color:#111827;
+      overflow-x:hidden;
+    }
+
+    .container{
+      width:100%;
+      max-width:1300px;
+      margin:auto;
+      padding:0 7%;
+    }
+
+    nav{
+      width:100%;
+      position:fixed;
+      top:0;
+      z-index:999;
+      background:rgba(255,255,255,.75);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,0,0,.05);
+    }
+
+    .navbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 0;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:800;
+      letter-spacing:-1px;
+      color:#0f172a;
+    }
+
+    .logo span{
+      color:#2563eb;
+    }
+
+    nav ul{
+      display:flex;
+      gap:35px;
+      list-style:none;
+    }
+
+    nav ul li a{
+      text-decoration:none;
+      color:#374151;
+      font-weight:500;
+      transition:.3s;
+    }
+
+    nav ul li a:hover{
+      color:#2563eb;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding-top:120px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:700px;
+      height:700px;
+      background:linear-gradient(135deg,#dbeafe,#bfdbfe);
+      border-radius:50%;
+      top:-300px;
+      right:-250px;
+      z-index:-1;
+    }
+
+    .hero-content{
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .hero-text h1{
+      font-size:76px;
+      line-height:1.05;
+      letter-spacing:-3px;
+      margin-bottom:28px;
+      color:#0f172a;
+    }
+
+    .hero-text p{
+      font-size:18px;
+      line-height:1.9;
+      color:#4b5563;
+      max-width:620px;
+    }
+
+    .buttons{
+      display:flex;
+      gap:18px;
+      margin-top:40px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:15px 32px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:600;
+      transition:.3s;
+      display:inline-block;
+    }
+
+    .btn-primary{
+      background:#2563eb;
+      color:white;
+      box-shadow:0 10px 30px rgba(37,99,235,.18);
+    }
+
+    .btn-secondary{
+      border:1px solid rgba(0,0,0,.08);
+      color:#111827;
+      background:white;
+    }
+
+    .btn:hover{
+      transform:translateY(-4px);
+    }
+
+    .hero-card{
+      background:white;
+      border-radius:30px;
+      padding:30px;
+      box-shadow:0 25px 60px rgba(15,23,42,.08);
+    }
+
+    .dashboard{
+      background:#0f172a;
+      border-radius:22px;
+      padding:22px;
+      color:white;
+    }
+
+    .topbar{
+      display:flex;
+      gap:8px;
+      margin-bottom:22px;
+    }
+
+    .circle{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:#334155;
+    }
+
+    .dashboard-box{
+      background:rgba(255,255,255,.06);
+      border-radius:18px;
+      height:110px;
+      margin-bottom:16px;
+    }
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    section{
+      padding:110px 0;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:52px;
+      letter-spacing:-2px;
+      margin-bottom:20px;
+      color:#0f172a;
+    }
+
+    .section-subtitle{
+      text-align:center;
+      color:#6b7280;
+      max-width:700px;
+      margin:auto auto 70px;
+      line-height:1.9;
+    }
+
+    .services{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .service-card{
+      background:white;
+      padding:40px 35px;
+      border-radius:24px;
+      box-shadow:0 10px 30px rgba(15,23,42,.05);
+      transition:.35s;
+    }
+
+    .service-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .service-card h3{
+      font-size:24px;
+      margin-bottom:18px;
+      color:#111827;
+    }
+
+    .service-card p{
+      color:#6b7280;
+      line-height:1.8;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:25px;
+      margin-top:50px;
+    }
+
+    .stat-box{
+      background:#0f172a;
+      color:white;
+      padding:40px;
+      border-radius:24px;
+      text-align:center;
+    }
+
+    .stat-box h2{
+      font-size:48px;
+      margin-bottom:10px;
+    }
+
+    .portfolio{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:25px;
+    }
+
+    .portfolio-card{
+      height:320px;
+      border-radius:26px;
+      overflow:hidden;
+      position:relative;
+      background:linear-gradient(135deg,#dbeafe,#eff6ff);
+      box-shadow:0 10px 35px rgba(15,23,42,.06);
+    }
+
+    .portfolio-content{
+      position:absolute;
+      bottom:30px;
+      left:30px;
+    }
+
+    .portfolio-content h3{
+      font-size:30px;
+      margin-bottom:8px;
+    }
+
+    .portfolio-content p{
+      color:#4b5563;
+    }
+
+    .pricing{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:28px;
+    }
+
+    .price-card{
+      background:white;
+      padding:45px 35px;
+      border-radius:28px;
+      box-shadow:0 10px 35px rgba(15,23,42,.05);
+      transition:.35s;
+    }
+
+    .price-card.featured{
+      background:#0f172a;
+      color:white;
+      transform:scale(1.03);
+    }
+
+    .price-card h3{
+      font-size:28px;
+      margin-bottom:20px;
+    }
+
+    .price{
+      font-size:58px;
+      font-weight:800;
+      margin-bottom:25px;
+    }
+
+    .price-card ul{
+      list-style:none;
+      margin-bottom:35px;
+    }
+
+    .price-card ul li{
+      margin:14px 0;
+      line-height:1.7;
+      color:inherit;
+      opacity:.85;
+    }
+
+    .contact{
+      background:#0f172a;
+      color:white;
+      border-radius:40px;
+      padding:80px 60px;
+      text-align:center;
+    }
+
+    .contact h2{
+      font-size:52px;
+      margin-bottom:20px;
+    }
+
+    .contact p{
+      color:#cbd5e1;
+      line-height:1.9;
+      max-width:700px;
+      margin:auto;
+    }
+
+    footer{
+      text-align:center;
+      padding:40px 0;
+      color:#6b7280;
+    }
+
+    @media(max-width:980px){
+      .hero-content{
+        grid-template-columns:1fr;
+      }
+
+      .hero-text h1{
+        font-size:54px;
+      }
+
+      nav ul{
+        display:none;
+      }
+    }
+
+    @media(max-width:600px){
+      .hero-text h1{
+        font-size:42px;
+      }
+
+      .section-title,
+      .contact h2{
+        font-size:36px;
+      }
+
+      .contact{
+        padding:60px 30px;
+      }
+
+      .buttons{
+        flex-direction:column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container navbar">
+    <div class="logo">Panz<span>Dev</span></div>
+
+    <ul>
+      <li><a href="#services">Layanan</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#pricing">Paket</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-content">
+
+    <div class="hero-text">
+      <h1>Build Modern Digital Presence.</h1>
+
+      <p>
+        PanzDev membantu bisnis tampil lebih profesional melalui website modern,
+        branding digital, dan layanan teknologi dengan desain clean, elegan,
+        serta responsif di semua perangkat.
+      </p>
+
+      <div class="buttons">
+        <a href="https://wa.me/6281234567890" class="btn btn-primary">Mulai Sekarang</a>
+        <a href="#portfolio" class="btn btn-secondary">Lihat Portfolio</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="dashboard">
+
+        <div class="topbar">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+
+        <div class="dashboard-box"></div>
+
+        <div class="dashboard-grid">
+          <div class="dashboard-box"></div>
+          <div class="dashboard-box"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+
+    <h2 class="section-title">Professional Services</h2>
+
+    <p class="section-subtitle">
+      Solusi digital modern untuk bisnis, personal branding, hingga kebutuhan teknologi harian.
+    </p>
+
+    <div class="services">
+
+      <div class="service-card">
+        <h3>Website Development</h3>
+        <p>Membangun website modern, cepat, dan responsive untuk bisnis maupun personal branding.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>UI/UX Design</h3>
+        <p>Desain antarmuka clean dan profesional yang meningkatkan pengalaman pengguna.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Android Service</h3>
+        <p>Perbaikan software dan hardware Android dengan proses cepat dan aman.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Digital Branding</h3>
+        <p>Membantu bisnis tampil lebih premium melalui visual dan identitas digital modern.</p>
+      </div>
+
+    </div>
+
+    <div class="stats">
+      <div class="stat-box">
+        <h2>50+</h2>
+        <p>Project Finished</p>
+      </div>
+
+      <div class="stat-box">
+        <h2>98%</h2>
+        <p>Client Satisfaction</p>
+      </div>
+
+      <div class="stat-box">
+        <h2>24/7</h2>
+        <p>Support Service</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="container">
+
+    <h2 class="section-title">Selected Works</h2>
+
+    <p class="section-subtitle">
+      Beberapa konsep website dan digital project yang dibuat dengan pendekatan modern dan elegan.
+    </p>
+
+    <div class="portfolio">
+
+      <div class="portfolio-card">
+        <div class="portfolio-content">
+          <h3>Business Profile</h3>
+          <p>Modern Company Website</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-content">
+          <h3>Tech Landing</h3>
+          <p>Startup Landing Page</p>
+        </div>
+      </div>
+
+      <div class="portfolio-card">
+        <div class="portfolio-content">
+          <h3>Online Store</h3>
+          <p>Simple Ecommerce UI</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="container">
+
+    <h2 class="section-title">Pricing Plans</h2>
+
+    <p class="section-subtitle">
+      Pilih paket website sesuai kebutuhan bisnis dan branding digital kamu.
+    </p>
+
+    <div class="pricing">
+
+      <div class="price-card">
+        <h3>Basic</h3>
+        <div class="price">50K</div>
+
+        <ul>
+          <li>1 Halaman Website</li>
+          <li>Responsive Mobile</li>
+          <li>WhatsApp Button</li>
+          <li>Modern Layout</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary">Pilih Paket</a>
+      </div>
+
+      <div class="price-card featured">
+        <h3>Elite</h3>
+        <div class="price">250K</div>
+
+        <ul>
+          <li>3-5 Halaman</li>
+          <li>Premium UI Design</li>
+          <li>Responsive Advanced</li>
+          <li>Modern Animation</li>
+          <li>Custom Branding</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary">Paket Favorit</a>
+      </div>
+
+      <div class="price-card">
+        <h3>Premium</h3>
+        <div class="price">350K</div>
+
+        <ul>
+          <li>Full Custom Design</li>
+          <li>Luxury Company Style</li>
+          <li>Interactive Experience</li>
+          <li>Priority Support</li>
+          <li>Professional Branding</li>
+        </ul>
+
+        <a href="#contact" class="btn btn-secondary">Pilih Paket</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+
+    <div class="contact">
+      <h2>Let's Build Something Great.</h2>
+
+      <p>
+        Tingkatkan tampilan bisnis dan branding digital kamu bersama PanzDev.
+        Konsultasi gratis untuk website modern dan kebutuhan digital lainnya.
+      </p>
+
+      <div class="buttons" style="justify-content:center; margin-top:35px;">
+        <a href="https://wa.me/6281234567890" class="btn btn-primary">Chat WhatsApp</a>
+        <a href="#" class="btn btn-secondary">Instagram</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 PanzDev Company Profile
+</footer>
+
+</body>
+</html>
